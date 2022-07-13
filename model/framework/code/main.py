@@ -1,10 +1,11 @@
 # imports
 import os
 import csv
-import joblib
 import sys
+import pandas as pd
 from rdkit import Chem
 from rdkit.Chem.Descriptors import MolWt
+from pkasolver.query import calculate_microstate_pka_values 
 
 # parse arguments
 input_file = sys.argv[1]
@@ -13,16 +14,20 @@ output_file = sys.argv[2]
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
 
-# checkpoints directory
-checkpoints_dir = os.path.abspath(os.path.join(root, "..", "..", "checkpoints"))
+# simplified version of pKa model: only the first pKa value
+def my_model(smiles_list):
+    outputs = []
+    for smi in smiles_list:
+        pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi))
+        if len(pka_vals) == 0:
+            #TODO: handle no pka case
+            outputs.append(-9999.0)
+        else:
+            #TODO: incorporate pka_stddev and properly formate row csv row vects
+            outputs.append([val.pka for val in pka_vals])
 
-# read checkpoints (here, simply an integer number: 42)
-ckpt = joblib.load(os.path.join(checkpoints_dir, "checkpoints.joblib"))
+    return outputs
 
-# model to be run (here, calculate the Molecular Weight and add ckpt (42) to it)
-def my_model(smiles_list, ckpt):
-    return [MolWt(Chem.MolFromSmiles(smi))+ckpt for smi in smiles_list]
-    
 # read SMILES from .csv file, assuming one column with header
 with open(input_file, "r") as f:
     reader = csv.reader(f)
@@ -30,7 +35,7 @@ with open(input_file, "r") as f:
     smiles_list = [r[0] for r in reader]
     
 # run model
-outputs = my_model(smiles_list, ckpt)
+outputs = my_model(smiles_list)
 
 # write output in a .csv file
 with open(output_file, "w") as f:

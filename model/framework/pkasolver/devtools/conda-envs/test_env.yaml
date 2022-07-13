@@ -1,0 +1,30 @@
+name: pka_prediction
+channels:
+ - pytorch
+ - conda-forge
+ - defaults
+dependencies:
+ - rdkit
+ - matplotlib
+ - pytorch
+ - cudatoolkit
+ - torchvision
+ - torchaudio
+ - python
+   # Testing
+ - pytest
+ - pytest-cov
+ - codecov
+ - numpy
+ - scipy
+ - tqdm
+ - svgutils
+ - cairosvg
+ - ipython
+ - pip
+ - pip:
+     - torch-geometric==2.0.1
+     - torch-sparse
+     - torch-scatter
+     - molvs
+     - chembl_webresource_client 
