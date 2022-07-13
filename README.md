@@ -1,4 +1,4 @@
-# Model title
+# Pkasolver
 ## Model identifiers
 - Slug: pkasolver   
 - Ersilia ID: eos2b6f
@@ -19,11 +19,11 @@ This model has been published by Fritz M, Wieder M, Wieder O, Langer T. Improvin
 - Checkpoints: https://github.com/mayrf/pkasolver/tree/main/pkasolver/trained_model_without_epik
 
 # License
-The GPL-v3 license applies to all parts of the repository that are not externally maintained libraries. This repository uses the externally maintained library "pkasolver", located at /model and licensed under an MIT License
+The GPL-v3 license applies to all parts of the repository that are not externally maintained libraries. This repository uses the externally maintained library "pkasolver", located at /model and licensed under an [MIT License](https://github.com/ersilia-os/eos2b6f/blob/main/model/LICENSE.md).
 
 # History 
-- Model was downloaded on 07/13/2022 from the pkasolver GitHub repository. 
-- Use case was inspired by the provided query notebook.
+- Model was downloaded on 07/13/2022 from the [pkasolver GitHub repository](https://github.com/mayrf/pkasolver). 
+- Use case was inspired by the provided [query notebook](https://github.com/ersilia-os/eos2b6f/blob/main/model/framework/pkasolver/notebooks/query_example.ipynb).
 - Model was incorporated into Ersilia on 07/13/2022.
 
 # About us
