@@ -1,9 +1,14 @@
 from typing import Tuple
 
+import sys
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
 import numpy as np
 from torch_geometric.loader import DataLoader
 
-from pkasolver.constants import DEVICE
+from framework.pkasolver.pkasolver.constants import DEVICE
 
 
 # PyG Dataset to Dataloader

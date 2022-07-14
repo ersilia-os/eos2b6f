@@ -1,6 +1,10 @@
 import logging
+import sys
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
 
-from pkasolver.chem import (atom_smarts_query, bond_smarts_query,
+from framework.pkasolver.pkasolver.chem import (atom_smarts_query, bond_smarts_query,
                             make_smarts_features)
 
 logger = logging.getLogger(__name__)

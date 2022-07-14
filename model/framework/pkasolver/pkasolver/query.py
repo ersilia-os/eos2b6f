@@ -4,8 +4,12 @@ from copy import deepcopy
 from dataclasses import dataclass
 from operator import attrgetter
 from os import path
+import sys
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
 
-import cairosvg
+# import cairosvg
 import numpy as np
 import svgutils.transform as sg
 import torch
@@ -13,15 +17,15 @@ from rdkit import Chem, RDLogger
 from rdkit.Chem import Draw
 from torch_geometric.loader import DataLoader
 
-from pkasolver.chem import create_conjugate
-from pkasolver.constants import DEVICE, EDGE_FEATURES, NODE_FEATURES
-from pkasolver.data import (
+from framework.pkasolver.pkasolver.chem import create_conjugate
+from framework.pkasolver.pkasolver.constants import DEVICE, EDGE_FEATURES, NODE_FEATURES
+from framework.pkasolver.pkasolver.data import (
     calculate_nr_of_features,
     make_features_dicts,
     mol_to_paired_mol_data,
 )
-from pkasolver.ml import dataset_to_dataloader
-from pkasolver.ml_architecture import GINPairV1
+from framework.pkasolver.pkasolver.ml import dataset_to_dataloader
+from framework.pkasolver.pkasolver.ml_architecture import GINPairV1
 
 
 @dataclass
@@ -468,94 +472,94 @@ def calculate_microstate_pka_values(
     return mols
 
 
-def draw_pka_map(protonation_states: list, size=(450, 450)):
-    """draw mol at pH=7.0 and indicate protonation sites with respectiv pKa values"""
-    mol_at_ph_7 = deepcopy(protonation_states[0].ph7_mol)
-    for protonation_state in range(len(protonation_states)):
+# def draw_pka_map(protonation_states: list, size=(450, 450)):
+#     """draw mol at pH=7.0 and indicate protonation sites with respectiv pKa values"""
+#     mol_at_ph_7 = deepcopy(protonation_states[0].ph7_mol)
+#     for protonation_state in range(len(protonation_states)):
 
-        state = protonation_states[protonation_state]
-        atom = mol_at_ph_7.GetAtomWithIdx(state.reaction_center_idx)
-        try:
-            atom.SetProp("atomNote", f'{atom.GetProp("atomNote")},   {state.pka:.2f}')
-        except:
-            atom.SetProp("atomNote", f"{state.pka:.2f}")
-    return Draw.MolToImage(mol_at_ph_7, size=size)
+#         state = protonation_states[protonation_state]
+#         atom = mol_at_ph_7.GetAtomWithIdx(state.reaction_center_idx)
+#         try:
+#             atom.SetProp("atomNote", f'{atom.GetProp("atomNote")},   {state.pka:.2f}')
+#         except:
+#             atom.SetProp("atomNote", f"{state.pka:.2f}")
+#     return Draw.MolToImage(mol_at_ph_7, size=size)
 
 
-def draw_pka_reactions(
-    protonation_states: list, height=250, write_png_to_file: str = ""
-):
-    """
-    Draws protonation states.
-    file can be saved as png using `write_png_to_file` parameter.
-    """
-    from IPython.display import SVG
+# def draw_pka_reactions(
+#     protonation_states: list, height=250, write_png_to_file: str = ""
+# ):
+#     """
+#     Draws protonation states.
+#     file can be saved as png using `write_png_to_file` parameter.
+#     """
+#     from IPython.display import SVG
 
-    draw_pairs, pair_atoms, legend = [], [], []
-    for i in range(len(protonation_states)):
+#     draw_pairs, pair_atoms, legend = [], [], []
+#     for i in range(len(protonation_states)):
 
-        state = protonation_states[i]
+#         state = protonation_states[i]
 
-        draw_pairs.extend([state.protonated_mol, state.deprotonated_mol])
-        pair_atoms.extend([[state.reaction_center_idx], [state.reaction_center_idx]])
-        f = f"pka_{i} = {state.pka:.2f} (stddev: {state.pka_stddev:.2f})"
-        legend.append(f)
+#         draw_pairs.extend([state.protonated_mol, state.deprotonated_mol])
+#         pair_atoms.extend([[state.reaction_center_idx], [state.reaction_center_idx]])
+#         f = f"pka_{i} = {state.pka:.2f} (stddev: {state.pka_stddev:.2f})"
+#         legend.append(f)
 
-    s = Draw.MolsToGridImage(
-        draw_pairs,
-        molsPerRow=2,
-        subImgSize=(height * 2, height),
-        highlightAtomLists=pair_atoms,
-        useSVG=True,
-    )
-    if hasattr(
-        s, "data"
-    ):  # Draw.MolsToGridImage returns different output depending on whether it is called in a notebook or a script
-        s = s.data.replace("svg:", "")
-    fig = sg.fromstring(s)
-    for i, text in enumerate(legend):
-        label = sg.TextElement(
-            height * 2,
-            (height * (i + 1)) - 10,
-            text,
-            size=14,
-            font="sans-serif",
-            anchor="middle",
-        )
-        fig.append(label)
-        h = height * (i + 0.5)
-        w = height * 2
-        fig.append(
-            sg.LineElement(
-                [(w * 0.9, h - height * 0.02), (w * 1.1, h - height * 0.02)],
-                width=2,
-                color="black",
-            )
-        )
-        fig.append(
-            sg.LineElement(
-                [(w * 1.1, h - height * 0.02), (w * 1.07, h - height * 0.04)],
-                width=2,
-                color="black",
-            )
-        )
-        fig.append(
-            sg.LineElement(
-                [(w * 0.9, h + height * 0.02), (w * 1.1, h + height * 0.02)],
-                width=2,
-                color="black",
-            )
-        )
-        fig.append(
-            sg.LineElement(
-                [(w * 0.9, h + height * 0.02), (w * 0.93, h + height * 0.04)],
-                width=2,
-                color="black",
-            )
-        )
-    # if png file path is passed write png file
-    if write_png_to_file:
-        cairosvg.svg2png(
-            bytestring=fig.to_str(), write_to=f"{write_png_to_file}", dpi=300
-        )
-    return SVG(fig.to_str())
+#     s = Draw.MolsToGridImage(
+#         draw_pairs,
+#         molsPerRow=2,
+#         subImgSize=(height * 2, height),
+#         highlightAtomLists=pair_atoms,
+#         useSVG=True,
+#     )
+#     if hasattr(
+#         s, "data"
+#     ):  # Draw.MolsToGridImage returns different output depending on whether it is called in a notebook or a script
+#         s = s.data.replace("svg:", "")
+#     fig = sg.fromstring(s)
+#     for i, text in enumerate(legend):
+#         label = sg.TextElement(
+#             height * 2,
+#             (height * (i + 1)) - 10,
+#             text,
+#             size=14,
+#             font="sans-serif",
+#             anchor="middle",
+#         )
+#         fig.append(label)
+#         h = height * (i + 0.5)
+#         w = height * 2
+#         fig.append(
+#             sg.LineElement(
+#                 [(w * 0.9, h - height * 0.02), (w * 1.1, h - height * 0.02)],
+#                 width=2,
+#                 color="black",
+#             )
+#         )
+#         fig.append(
+#             sg.LineElement(
+#                 [(w * 1.1, h - height * 0.02), (w * 1.07, h - height * 0.04)],
+#                 width=2,
+#                 color="black",
+#             )
+#         )
+#         fig.append(
+#             sg.LineElement(
+#                 [(w * 0.9, h + height * 0.02), (w * 1.1, h + height * 0.02)],
+#                 width=2,
+#                 color="black",
+#             )
+#         )
+#         fig.append(
+#             sg.LineElement(
+#                 [(w * 0.9, h + height * 0.02), (w * 0.93, h + height * 0.04)],
+#                 width=2,
+#                 color="black",
+#             )
+#         )
+#     # if png file path is passed write png file
+#     if write_png_to_file:
+#         cairosvg.svg2png(
+#             bytestring=fig.to_str(), write_to=f"{write_png_to_file}", dpi=300
+#         )
+#     return SVG(fig.to_str())

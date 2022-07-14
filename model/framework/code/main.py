@@ -5,7 +5,11 @@ import sys
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem.Descriptors import MolWt
-from pkasolver.query import calculate_microstate_pka_values 
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
+from framework.pkasolver.pkasolver.query import calculate_microstate_pka_values 
 
 # parse arguments
 input_file = sys.argv[1]

@@ -1,7 +1,11 @@
 import argparse
 import pickle
+import sys
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
 
-from pkasolver import run_with_mol_list
+from pkasolver.dimorphite_dl.dimorphite_dl import run_with_mol_list
 from rdkit import Chem
 
 parser = argparse.ArgumentParser()

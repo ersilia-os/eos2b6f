@@ -5,7 +5,12 @@ from torch_geometric.nn import (GCNConv, GlobalAttention, NNConv,
                                 global_mean_pool)
 from tqdm import tqdm
 
-from pkasolver.constants import DEVICE, SEED
+import sys
+from pathlib import Path
+path_root = Path(__file__).parents[2]
+sys.path.append(str(path_root))
+
+from framework.pkasolver.pkasolver.constants import DEVICE, SEED
 
 #####################################
 #####################################

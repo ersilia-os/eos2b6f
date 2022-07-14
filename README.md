@@ -24,6 +24,8 @@ The GPL-v3 license applies to all parts of the repository that are not externall
 # History 
 - Model was downloaded on 07/13/2022 from the [pkasolver GitHub repository](https://github.com/mayrf/pkasolver). 
 - Use case was inspired by the provided [query notebook](https://github.com/ersilia-os/eos2b6f/blob/main/model/framework/pkasolver/notebooks/query_example.ipynb).
+- Edited the imports of the following scripts to ensure compatibility and eliminate setup.py install command: (call_dimorphite_dl.py, dimorphite_dl.py, query.py, constants.py, data.py, ml.py, ml_architecture.py)
+- Commented unnecessary visualization code in query.py
 - Model was incorporated into Ersilia on 07/13/2022.
 
 # About us
