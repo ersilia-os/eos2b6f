@@ -28,7 +28,8 @@ def my_model(smiles_list):
             outputs.append(-9999.0)
         else:
             #TODO: incorporate pka_stddev and properly formate row csv row vects
-            outputs.append([val.pka for val in pka_vals])
+            # outputs.append([val.pka for val in pka_vals])
+            outputs.append(pka_vals[0].pka)
 
     return outputs
 
