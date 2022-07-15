@@ -1,9 +1,13 @@
 import logging
+
+# Ersilia addition
 import sys
 from pathlib import Path
 path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
+# End Ersilia addition
 
+# Ersilia changed local package import statements for compatibility
 from framework.pkasolver.pkasolver.chem import (atom_smarts_query, bond_smarts_query,
                             make_smarts_features)
 

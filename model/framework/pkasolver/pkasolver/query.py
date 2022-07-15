@@ -4,10 +4,13 @@ from copy import deepcopy
 from dataclasses import dataclass
 from operator import attrgetter
 from os import path
+
+# Ersilia addition:
 import sys
 from pathlib import Path
 path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
+# Ersilia addition end 
 
 # import cairosvg
 import numpy as np
@@ -17,6 +20,7 @@ from rdkit import Chem, RDLogger
 from rdkit.Chem import Draw
 from torch_geometric.loader import DataLoader
 
+# Ersilia changed local package import statements for compatibility
 from framework.pkasolver.pkasolver.chem import create_conjugate
 from framework.pkasolver.pkasolver.constants import DEVICE, EDGE_FEATURES, NODE_FEATURES
 from framework.pkasolver.pkasolver.data import (

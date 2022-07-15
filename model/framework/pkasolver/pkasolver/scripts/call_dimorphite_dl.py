@@ -1,10 +1,14 @@
 import argparse
 import pickle
+
+# Ersilia addition
 import sys
 from pathlib import Path
 path_root = Path(__file__).parents[2]
 sys.path.append(str(path_root))
+# end Ersilia addition
 
+# Ersilia changed local package import statements for compatibility
 from pkasolver.dimorphite_dl.dimorphite_dl import run_with_mol_list
 from rdkit import Chem
 
