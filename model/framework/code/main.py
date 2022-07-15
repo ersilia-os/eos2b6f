@@ -26,10 +26,8 @@ def my_model(smiles_list):
         pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi))
         if len(pka_vals) == 0:
             output_df.loc[len(output_df.index)] = [np.NaN, np.NaN]
-            # outputs.append(-9999.0)
         else:
             output_df.loc[len(output_df.index)] = [pka_vals[0].pka, pka_vals[0].pka_stddev]
-            # outputs.append([pka_vals[0].pka, pka_vals[0].pka_stddev])
 
     return output_df
 
@@ -47,11 +45,3 @@ print(outputs.head())
 
 # write outputs to file (outputs is a pd dataframe)
 outputs.to_csv(output_file, index=False)
-
-
-# # write output in a .csv file
-# with open(output_file, "w") as f:
-#     writer = csv.writer(f)
-#     writer.writerow(["pka value", "pka stddev"]) # header
-#     for o in outputs:
-#         writer.writerow(o)

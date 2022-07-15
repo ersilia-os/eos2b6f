@@ -7,7 +7,7 @@
 # Model description
 Short description of the model in one or two sentences.
 - Input: SMILES
-- Output: pKa value (measure of aciditiy)
+- Output: first pKa value (measure of aciditiy) and estimate stddev of pKa value
 - Model type: Regression
 - Training set: 714,906 compounds
 - Mode of training: Pretrained
@@ -26,6 +26,7 @@ The GPL-v3 license applies to all parts of the repository that are not externall
 - Use case was inspired by the provided [query notebook](https://github.com/ersilia-os/eos2b6f/blob/main/model/framework/pkasolver/notebooks/query_example.ipynb).
 - Edited the imports of the following scripts to ensure compatibility and eliminate setup.py install command: (call_dimorphite_dl.py, dimorphite_dl.py, query.py, constants.py, data.py, ml.py, ml_architecture.py)
 - Commented unnecessary visualization code in query.py
+- Adapted model to output only the first pKa value. The fully open source pkasolver-light model version was only trained with the first pKa value of a compound. Access to an [Epik](https://www.schrodinger.com/products/epik) license is necessary for use of the pkasolver-epic model trained to deliver multiprotic pKa values (Fritz et al.). 
 - Model was incorporated into Ersilia on 07/13/2022.
 
 # About us
