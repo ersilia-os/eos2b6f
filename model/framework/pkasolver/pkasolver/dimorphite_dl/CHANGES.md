@@ -1,6 +1,12 @@
 Changes
 =======
 
+2.0
+-----
+* In adapting pkasolver to Ersilia Open Source Initiative's model hub, an 
+  argument was added to the dimorphite_dl.py script in order to pipe output pka 
+  value to pkasolver in a predictable fashion. 
+
 1.2.4
 -----
 

@@ -27,6 +27,7 @@ The GPL-v3 license applies to all parts of the repository that are not externall
 - Edited the imports of the following scripts to ensure compatibility and eliminate setup.py install command: (call_dimorphite_dl.py, dimorphite_dl.py, query.py, constants.py, data.py, ml.py, ml_architecture.py)
 - Commented unnecessary visualization code in query.py
 - Adapted model to output only the first pKa value. The fully open source pkasolver-light model version was only trained with the first pKa value of a compound. Access to an [Epik](https://www.schrodinger.com/products/epik) license is necessary for use of the pkasolver-epic model trained to deliver multiprotic pKa values (Fritz et al.). 
+- Added a new argument (output_path) to dimorphite_dl.py script, changing function calls in call_dimorphite_dl.py and query.py to reflect this difference. This change was made to pipe the output from dimorphite_dl such that it can later be deleted from the user's system. 
 - Model was incorporated into Ersilia on 07/13/2022.
 
 # About us

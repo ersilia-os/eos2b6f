@@ -174,15 +174,15 @@ def _get_ionization_indices(mol_list: list, compare_to: Chem.Mol) -> list:
     return list_of_reaction_centers
 
 
-def _parse_dimorphite_dl_output():
+def _parse_dimorphite_dl_output(output_path):
     import pickle
 
-    mols = pickle.load(open("test.pkl", "rb"))
+    mols = pickle.load(open(output_path, "rb"))
     return mols
 
 
 def _call_dimorphite_dl(
-    mol: Chem.Mol, min_ph: float, max_ph: float, pka_precision: float = 1.0
+    mol: Chem.Mol, min_ph: float, max_ph: float,  output_path: str, pka_precision: float = 1.0
 ):
     """calls  dimorphite_dl with parameters"""
     import subprocess
@@ -205,12 +205,14 @@ def _call_dimorphite_dl(
             f"{max_ph}",
             "--pka_precision",
             f"{pka_precision}",
+             "--output_path",
+            f"{output_path}",
         ],
         stderr=subprocess.STDOUT,
     )
     o.check_returncode()
     # get list of smiles
-    mols = _parse_dimorphite_dl_output()
+    mols = _parse_dimorphite_dl_output(output_path)
     return mols
 
 
@@ -243,7 +245,7 @@ def _check_for_duplicates(states: list):
 
 
 def calculate_microstate_pka_values(
-    mol: Chem.rdchem.Mol, only_dimorphite: bool = False, query_model=None
+    mol: Chem.rdchem.Mol, output_path: str, only_dimorphite: bool = False, query_model=None
 ):
     """Enumerate protonation states using a rdkit mol as input"""
 
@@ -255,8 +257,8 @@ def calculate_microstate_pka_values(
             "BEWARE! This is experimental and might generate wrong protonation states."
         )
         logger.debug("Using dimorphite-dl to enumerate protonation states.")
-        mol_at_ph_7 = _call_dimorphite_dl(mol, min_ph=7.0, max_ph=7.0, pka_precision=0)
-        all_mols = _call_dimorphite_dl(mol, min_ph=0.5, max_ph=13.5)
+        mol_at_ph_7 = _call_dimorphite_dl(mol, min_ph=7.0, max_ph=7.0, output_path=output_path, pka_precision=0)
+        all_mols = _call_dimorphite_dl(mol, min_ph=0.5, max_ph=13.5, output_path=output_path)
         # sort mols
         atom_charges = [
             np.sum([atom.GetTotalNumHs() for atom in mol.GetAtoms()])
@@ -303,10 +305,10 @@ def calculate_microstate_pka_values(
 
     else:
         logger.info("Using dimorphite-dl to identify protonation sites.")
-        mol_at_ph_7 = _call_dimorphite_dl(mol, min_ph=7.0, max_ph=7.0, pka_precision=0)
+        mol_at_ph_7 = _call_dimorphite_dl(mol, min_ph=7.0, max_ph=7.0, output_path=output_path, pka_precision=0)
         assert len(mol_at_ph_7) == 1
         mol_at_ph_7 = mol_at_ph_7[0]
-        all_mols = _call_dimorphite_dl(mol, min_ph=0.5, max_ph=13.5)
+        all_mols = _call_dimorphite_dl(mol, min_ph=0.5, max_ph=13.5, output_path=output_path)
 
         # identify protonation sites
         reaction_center_atom_idxs = sorted(

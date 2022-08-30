@@ -1,4 +1,5 @@
 # imports
+from genericpath import isfile
 import os
 import csv
 import sys
@@ -18,12 +19,15 @@ output_file = sys.argv[2]
 
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.abspath(os.path.join(root, "output.pkl"))
+
+
 
 # simplified version of pKa model: only the first pKa value
 def my_model(smiles_list):
     output_df = pd.DataFrame(columns=["pka value", "pka stddev"])
     for smi in smiles_list:
-        pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi))
+        pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi), output_path=output_path)
         if len(pka_vals) == 0:
             output_df.loc[len(output_df.index)] = [np.NaN, np.NaN]
         else:
@@ -40,8 +44,13 @@ with open(input_file, "r") as f:
     
 # run model
 outputs = my_model(smiles_list)
-print(type(outputs))
-print(outputs.head())
 
 # write outputs to file (outputs is a pd dataframe)
 outputs.to_csv(output_file, index=False)
+
+# remove dimorphite_dl output pkl file
+if os.path.isfile(output_path):
+    os.remove(output_path)
+    print("successfully removed dimorphite_dl output pkl")
+else:
+    print("couldn't locate dimorphite_dl output pkl")

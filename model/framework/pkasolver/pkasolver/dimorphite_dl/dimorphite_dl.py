@@ -193,11 +193,18 @@ class ArgParseFuncs:
             type=str,
             help="file that contains SMILES strings to protonate",
         )
+        # the below argument is an ersilia addition
         parser.add_argument(
             "--output_file",
             metavar="FILE",
             type=str,
             help="output file to write protonated SMILES (optional)",
+        )
+        parser.add_argument(
+            "--output_path",
+            metavar="FILE",
+            type=str,
+            help="output file to write pka values (optional)",
         )
         parser.add_argument(
             "--max_variants",
