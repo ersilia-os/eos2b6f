@@ -48,9 +48,9 @@ outputs = my_model(smiles_list)
 # write outputs to file (outputs is a pd dataframe)
 outputs.to_csv(output_file, index=False)
 
-# remove dimorphite_dl output pkl file
-if os.path.isfile(output_path):
-    os.remove(output_path)
-    print("successfully removed dimorphite_dl output pkl")
-else:
-    print("couldn't locate dimorphite_dl output pkl")
+# # remove dimorphite_dl output pkl file
+# if os.path.isfile(output_path):
+#     os.remove(output_path)
+#     print("successfully removed dimorphite_dl output pkl")
+# else:
+#     print("couldn't locate dimorphite_dl output pkl")
