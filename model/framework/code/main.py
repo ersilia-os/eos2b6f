@@ -16,10 +16,13 @@ from framework.pkasolver.pkasolver.query import calculate_microstate_pka_values
 # parse arguments
 input_file = sys.argv[1]
 output_file = sys.argv[2]
-dimorph_file = sys.argv[3]
+#dimorphite_dl = sys.argv[3]
+
 
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
+
+dimorphite_dl = os.path.abspath(os.path.join(root, "pkasolver", "pkasolver","dimorphite_dl", "dimorphite_dl.py")) 
 
 # simplified version of pKa model: only the first pKa value
 def my_model(smiles_list):
