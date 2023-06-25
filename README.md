@@ -23,6 +23,9 @@ This model employs transfer learning with graph neural networks in order to pred
 * [Source Code](https://github.com/mayrf/pkasolver)
 * Ersilia contributor: [svolk19-stanford ](https://github.com/svolk19-stanford )
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos2b6f)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://www.biorxiv.org/content/10.1101/2022.01.20.476787v1) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
