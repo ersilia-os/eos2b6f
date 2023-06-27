@@ -27,5 +27,11 @@
     "Publication": "https://www.biorxiv.org/content/10.1101/2022.01.20.476787v1",
     "Source Code": "https://github.com/mayrf/pkasolver",
     "License": "MIT",
-    "Contributor": "svolk19-stanford "
+    "Contributor": "svolk19-stanford ",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip",
+    "DockerHub": "https://hub.docker.com/r/ersiliaos/eos2b6f",
+    "Docker Architecture": [
+        "AMD64",
+        "ARM64"
+    ]
 }

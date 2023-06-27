@@ -25,6 +25,8 @@ This model employs transfer learning with graph neural networks in order to pred
 
 ## Ersilia model URLs
 * [GitHub](https://github.com/ersilia-os/eos2b6f)
+* [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos2b6f) (AMD64, ARM64)
 
 ## Citation
 
