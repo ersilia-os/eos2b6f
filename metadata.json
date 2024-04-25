@@ -31,7 +31,6 @@
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos2b6f",
     "Docker Architecture": [
-        "AMD64",
-        "ARM64"
+        "AMD64"
     ]
 }
