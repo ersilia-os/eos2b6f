@@ -5,12 +5,6 @@ from dataclasses import dataclass
 from operator import attrgetter
 from os import path
 
-# Ersilia addition:
-import sys
-from pathlib import Path
-path_root = Path(__file__).parents[2]
-sys.path.append(str(path_root))
-# Ersilia addition end 
 
 # import cairosvg
 import numpy as np
@@ -21,15 +15,15 @@ from rdkit.Chem import Draw
 from torch_geometric.loader import DataLoader
 
 # Ersilia changed local package imports for compatibility
-from framework.pkasolver.pkasolver.chem import create_conjugate
-from framework.pkasolver.pkasolver.constants import DEVICE, EDGE_FEATURES, NODE_FEATURES
-from framework.pkasolver.pkasolver.data import (
+from pkasolver.chem import create_conjugate
+from pkasolver.constants import DEVICE, EDGE_FEATURES, NODE_FEATURES
+from pkasolver.data import (
     calculate_nr_of_features,
     make_features_dicts,
     mol_to_paired_mol_data,
 )
-from framework.pkasolver.pkasolver.ml import dataset_to_dataloader
-from framework.pkasolver.pkasolver.ml_architecture import GINPairV1
+from pkasolver.ml import dataset_to_dataloader
+from pkasolver.ml_architecture import GINPairV1
 
 
 @dataclass
@@ -83,6 +77,7 @@ class QueryModel:
                 checkpoint = torch.load(
                     f"{base_path}/trained_model_without_epik/best_model_{i}.pt",
                     map_location=torch.device("cpu"),
+                    weights_only=True,
                 )
             else:
                 checkpoint = torch.load(

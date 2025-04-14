@@ -8,7 +8,7 @@ sys.path.append(str(path_root))
 # End Ersilia addition
 
 # Ersilia changed local package import statements for compatibility
-from framework.pkasolver.pkasolver.chem import (atom_smarts_query, bond_smarts_query,
+from pkasolver.chem import (atom_smarts_query, bond_smarts_query,
                             make_smarts_features)
 
 logger = logging.getLogger(__name__)

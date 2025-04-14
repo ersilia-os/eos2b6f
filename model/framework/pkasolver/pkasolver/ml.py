@@ -1,17 +1,9 @@
 from typing import Tuple
 
-# Ersilia addition
-import sys
-from pathlib import Path
-path_root = Path(__file__).parents[2]
-sys.path.append(str(path_root))
-# End Ersilia addition
-
 import numpy as np
 from torch_geometric.loader import DataLoader
 
-# Ersilia changed local package import statements for compatibility
-from framework.pkasolver.pkasolver.constants import DEVICE
+from pkasolver.constants import DEVICE
 
 
 # PyG Dataset to Dataloader

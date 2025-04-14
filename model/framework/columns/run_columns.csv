@@ -1,0 +1,3 @@
+name,type,direction,description
+pka_value,float,high,Predicted pKa value of the compound
+pka_stddev,float,low,Standard deviation of the predicted pKa value

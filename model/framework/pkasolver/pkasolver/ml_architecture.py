@@ -5,15 +5,7 @@ from torch_geometric.nn import (GCNConv, GlobalAttention, NNConv,
                                 global_mean_pool)
 from tqdm import tqdm
 
-# Ersilia addition
-import sys
-from pathlib import Path
-path_root = Path(__file__).parents[2]
-sys.path.append(str(path_root))
-# End ersilia addition
-
-# Ersilia changed local package import statements for compatibility
-from framework.pkasolver.pkasolver.constants import DEVICE, SEED
+from pkasolver.constants import DEVICE, SEED
 
 #####################################
 #####################################

@@ -3,13 +3,6 @@
 from copy import deepcopy
 from typing import Tuple
 
-# Ersilia addition
-import sys
-from pathlib import Path
-path_root = Path(__file__).parents[2]
-sys.path.append(str(path_root))
-# End Ersilia addition
-
 from rdkit import Chem
 from rdkit.Chem import PandasTools, PropertyMol
 from rdkit.Chem.AllChem import Compute2DCoords
@@ -24,9 +17,8 @@ import torch
 import tqdm
 from torch_geometric.data import Data
 
-# Ersilia changed local package import statements for compatibility
-from framework.pkasolver.pkasolver.chem import create_conjugate
-from framework.pkasolver.pkasolver.constants import (
+from pkasolver.chem import create_conjugate
+from pkasolver.constants import (
     DEVICE,
     EDGE_FEATURES,
     NODE_FEATURES,
