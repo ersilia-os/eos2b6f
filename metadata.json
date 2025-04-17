@@ -3,22 +3,19 @@
     "Slug": "pkasolver",
     "Status": "Ready",
     "Title": "Microstate pKa values",
-    "Description": "This model employs transfer learning with graph neural networks in order to predict micro-state pKa values of small molecules. The model enumerates the molecule's protonation states and predicts its pKa values. It was trained in two phases, first, using a large ChEMBL dataset and then fine-tuning the model for a small training set of molecules with available pKa values. The model in this repository is the pkasolver-light, which does not require an Epik license and is limited to monoprotic molecules.\n",
+    "Description": "This model employs transfer learning with graph neural networks in order to predict micro-state pKa values of small molecules. The model enumerates the molecules protonation states and predicts its pKa values. It was trained in two phases, first, using a large ChEMBL dataset and then fine-tuning the model for a small training set of molecules with available pKa values. The model in this repository is the pkasolver-light, which does not require an Epik license and is limited to monoprotic molecules.",
+    "Deployment": [
+        "Local"
+    ],
     "Source": "Local",
     "Source Type": "External",
+    "Task": "Annotation",
+    "Subtask": "Property calculation or prediction",
     "Input": [
         "Compound"
     ],
-    "Input Shape": "Single",
     "Input Dimension": 1,
-    "Task": "Annotation",
-    "Subtask": "Property calculation or prediction",
-    "Biomedical Area": [
-        "ADMET"
-    ],
-    "Target Organism": [
-        "Not Applicable"
-    ],
+    "Input Shape": "Single",
     "Output": [
         "Experimental value"
     ],
@@ -29,19 +26,22 @@
         "pKa",
         "ADME"
     ],
-    "Publication": "https://www.frontiersin.org/journals/chemistry/articles/10.3389/fchem.2022.866585/full",
+    "Biomedical Area": [
+        "ADMET"
+    ],
+    "Target Organism": [
+        "Not Applicable"
+    ],
     "Publication Type": "Peer reviewed",
     "Publication Year": 2022,
+    "Publication": "https://www.frontiersin.org/journals/chemistry/articles/10.3389/fchem.2022.866585/full",
     "Source Code": "https://github.com/mayrf/pkasolver",
     "License": "MIT",
     "Contributor": "svolk19-stanford ",
-    "Incorporation Date": "2022-07-14",
+    "Incorporation Date": "2022-07-13",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos2b6f",
     "Docker Architecture": [
         "AMD64"
-    ],
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip",
-    "Deployment": [
-        "Local"
     ]
 }
