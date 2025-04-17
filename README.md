@@ -1,8 +1,8 @@
 # Microstate pKa values
 
-This model employs transfer learning with graph neural networks in order to predict micro-state pKa values of small molecules. The model enumerates the molecule's protonation states and predicts its pKa values. It was trained in two phases, first, using a large ChEMBL dataset and then fine-tuning the model for a small training set of molecules with available pKa values. The model in this repository is the pkasolver-light, which does not require an Epik license and is limited to monoprotic molecules.
+This model employs transfer learning with graph neural networks in order to predict micro-state pKa values of small molecules. The model enumerates the molecules protonation states and predicts its pKa values. It was trained in two phases, first, using a large ChEMBL dataset and then fine-tuning the model for a small training set of molecules with available pKa values. The model in this repository is the pkasolver-light, which does not require an Epik license and is limited to monoprotic molecules.
 
-This model was incorporated on 2022-07-14.
+This model was incorporated on 2022-07-13.
 
 ## Information
 ### Identifiers
@@ -40,6 +40,8 @@ Below are the **Output Columns** of the model:
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos2b6f.zip)
 
 ### Resource Consumption
+- **Model Size (Mb):** `119`
+- **Environment Size (Mb):** `5657`
 
 
 ### References
