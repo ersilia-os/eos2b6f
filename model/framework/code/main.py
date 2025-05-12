@@ -11,7 +11,7 @@ from pathlib import Path
 
 root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(root))
-sys.path.append(os.path.join(root, "..", "pkasolver"))
+sys.path.append(os.path.join(root, "pkasolver"))
 from pkasolver.query import calculate_microstate_pka_values 
 
 # parse arguments
@@ -19,10 +19,7 @@ input_file = sys.argv[1]
 output_file = sys.argv[2]
 
 
-# current file directory
-root = os.path.dirname(os.path.abspath(__file__))
-
-dimorph_file = os.path.abspath(os.path.join(root, "..", "dimorphite_dl.pkl")) 
+dimorph_file = os.path.abspath(os.path.join(root, "dimorphite_dl.pkl")) 
 
 # simplified version of pKa model: only the first pKa value
 def my_model(smiles_list):
@@ -50,4 +47,4 @@ outputs.to_csv(output_file, index=False)
 
 # # remove dimorphite_dl output pkl file
 if os.path.isfile(dimorph_file):
-     os.remove(dimorph_file)
+    os.remove(dimorph_file)
