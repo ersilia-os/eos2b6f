@@ -4,6 +4,7 @@ This model employs transfer learning with graph neural networks in order to pred
 
 This model was incorporated on 2022-07-13.
 
+
 ## Information
 ### Identifiers
 - **Ersilia Identifier:** `eos2b6f`
@@ -13,7 +14,7 @@ This model was incorporated on 2022-07-13.
 - **Task:** `Annotation`
 - **Subtask:** `Property calculation or prediction`
 - **Biomedical Area:** `ADMET`
-- **Target Organism:** `Not Applicable`
+- **Target Organism:** `Any`
 - **Tags:** `pKa`, `ADME`
 
 ### Input
