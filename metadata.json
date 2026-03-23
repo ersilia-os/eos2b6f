@@ -16,9 +16,10 @@
     ],
     "Input Dimension": 1,
     "Output": [
-        "Value"
+        "pka_value",
+        "pka_stddev"
     ],
-    "Output Dimension": 1,
+    "Output Dimension": 2,
     "Output Consistency": "Fixed",
     "Interpretation": "Acidity of a molecule (lower pKa indicates stronger acid)",
     "Tag": [
