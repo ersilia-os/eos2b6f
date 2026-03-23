@@ -16,8 +16,7 @@
     ],
     "Input Dimension": 1,
     "Output": [
-        "pka_value",
-        "pka_stddev"
+        "Value"
     ],
     "Output Dimension": 2,
     "Output Consistency": "Fixed",
