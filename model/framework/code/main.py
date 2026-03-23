@@ -3,6 +3,7 @@ from genericpath import isfile
 import os
 import csv
 import sys
+import tempfile
 import pandas as pd
 import numpy as np
 from rdkit import Chem
@@ -19,7 +20,8 @@ input_file = sys.argv[1]
 output_file = sys.argv[2]
 
 
-dimorph_file = os.path.abspath(os.path.join(root, "dimorphite_dl.pkl")) 
+tmp_fd, dimorph_file = tempfile.mkstemp(suffix=".pkl")
+os.close(tmp_fd)
 
 # simplified version of pKa model: only the first pKa value
 def my_model(smiles_list):
