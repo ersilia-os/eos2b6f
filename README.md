@@ -21,7 +21,7 @@ This model was incorporated on 2022-07-13.Last packaged on 2025-10-14.
 - **Input Dimension:** `1`
 
 ### Output
-- **Output Dimension:** `1`
+- **Output Dimension:** `2`
 - **Output Consistency:** `Fixed`
 - **Interpretation:** Acidity of a molecule (lower pKa indicates stronger acid)
 
