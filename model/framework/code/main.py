@@ -13,7 +13,7 @@ from pathlib import Path
 root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(str(root))
 sys.path.append(os.path.join(root, "pkasolver"))
-from pkasolver.query import calculate_microstate_pka_values 
+from pkasolver.query import calculate_microstate_pka_values, QueryModel
 
 # parse arguments
 input_file = sys.argv[1]
@@ -24,10 +24,10 @@ tmp_fd, dimorph_file = tempfile.mkstemp(suffix=".pkl")
 os.close(tmp_fd)
 
 # simplified version of pKa model: only the first pKa value
-def my_model(smiles_list):
+def my_model(smiles_list, query_model):
     output_df = pd.DataFrame(columns=["pka_value", "pka_stddev"])
     for smi in smiles_list:
-        pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi), output_path=dimorph_file)
+        pka_vals = calculate_microstate_pka_values(Chem.MolFromSmiles(smi), output_path=dimorph_file, query_model=query_model)
         if len(pka_vals) == 0:
             output_df.loc[len(output_df.index)] = [np.NaN, np.NaN]
         else:
@@ -40,9 +40,12 @@ with open(input_file, "r") as f:
     reader = csv.reader(f)
     next(reader) # skip header
     smiles_list = [r[0] for r in reader]
-    
+
+# load model once and reuse across all molecules
+query_model = QueryModel()
+
 # run model
-outputs = my_model(smiles_list)
+outputs = my_model(smiles_list, query_model)
 
 # write outputs to file (outputs is a pd dataframe)
 outputs.to_csv(output_file, index=False)
