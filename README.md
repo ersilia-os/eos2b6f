@@ -51,7 +51,7 @@ Below are the **Output Columns** of the model:
 
 ### References
 - **Source Code**: [https://github.com/mayrf/pkasolver](https://github.com/mayrf/pkasolver)
-- **Publication**: [https://www.frontiersin.org/journals/chemistry/articles/10.3389/fchem.2022.866585/full](https://www.frontiersin.org/journals/chemistry/articles/10.3389/fchem.2022.866585/full)
+- **Publication**: [https://doi.org/10.3389/fchem.2022.866585](https://doi.org/10.3389/fchem.2022.866585)
 - **Publication Type:** `Peer reviewed`
 - **Publication Year:** `2022`
 - **Ersilia Contributor:** [svolk19-stanford ](https://github.com/svolk19-stanford )
