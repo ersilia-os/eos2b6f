@@ -1,6 +1,6 @@
 # Microstate pKa values
 
-This model employs transfer learning with graph neural networks in order to predict micro-state pKa values of small molecules. The model enumerates the molecules protonation states and predicts its pKa values. It was trained in two phases, first, using a large ChEMBL dataset and then fine-tuning the model for a small training set of molecules with available pKa values. The model in this repository is the pkasolver-light, which does not require an Epik license and is limited to monoprotic molecules.
+Predicts microstate pKa values, which set the ionisation state a molecule adopts at physiological pH and therefore influence solubility, permeability and binding. Mayr and colleagues addressed the shortage of measured pKa data by pretraining a graph neural network on a large body of calculated values and then transferring to the smaller experimental set. Alongside the prediction the model reports the spread across an ensemble, giving a direct read on where it is least certain.
 
 This model was incorporated on 2022-07-13.Last packaged on 2026-04-14.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2022-07-13.Last packaged on 2026-04-14.
 ### Output
 - **Output Dimension:** `2`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Acidity of a molecule (lower pKa indicates stronger acid)
+- **Interpretation:** Predicted microstate pKa value together with the ensemble standard deviation.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
