@@ -72,7 +72,7 @@ class QueryModel:
             model = model_class(
                 num_node_features, num_edge_features, hidden_channels=96
             )
-            base_path = path.dirname(__file__)
+            base_path = path.join(path.dirname(path.abspath(__file__)), "..", "..", "..", "..", "checkpoints")
             if torch.cuda.is_available() == False:  # If only CPU is available
                 checkpoint = torch.load(
                     f"{base_path}/trained_model_without_epik/best_model_{i}.pt",
