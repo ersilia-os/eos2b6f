@@ -2,7 +2,8 @@
 
 Predicts the microstate pKa that decides which ionisation state a molecule adopts at physiological pH, and with it solubility, permeability and binding. Mayr and colleagues paired a graph neural network with Dimorphite-DL to enumerate protonation states. Bundled here is pkasolver-light, the ensemble trained only on the 5994 experimental values so it can ship without an Epik licence, and its applicability is limited to monoprotic molecules. Only the first microstate is returned, with the spread across the ensemble.
 
-This model was incorporated on 2022-07-13.Last packaged on 2026-04-14.
+This model was incorporated on 2022-07-13.
+Last packaged on 2026-04-14.
 
 ## Information
 ### Identifiers
@@ -29,7 +30,7 @@ Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
 |------|------|-----------|-------------|
 | pka_value | float | high | Predicted pKa value of the compound |
-| pka_stddev | float | low | Standard deviation of the predicted pKa value |
+| pka_stddev | float |  | Standard deviation of the predicted pKa value |
 
 
 ### Source and Deployment
